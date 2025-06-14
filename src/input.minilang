@@ -1,0 +1,8 @@
+int n;
+n = 7;
+if (n < 10) {
+    n = n * 2 + 1;
+} else {
+    n = n - 3;
+}
+print(n);
