@@ -9,6 +9,8 @@ public class Main {
         System.out.println("You can find the results in the console output.");
         System.out.println("Thank you for using the MiniLang Lexical Analyzer!");
         System.out.println("---------------------------------------------------------------------------------");
-        
+        SimpleLexer simpleLexer=new SimpleLexer();
+        simpleLexer.toString();
+
     }
 }
