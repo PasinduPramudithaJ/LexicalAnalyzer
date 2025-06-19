@@ -1,16 +1,45 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("---------------------------------------------------------------------------------");
-        System.out.println("This is the Lexical Analyzer for MiniLang.");
-        System.out.println("Please ensure you have the input.minilang file in the correct directory.");
-        System.out.println("The lexical analysis will be performed on the contents of that file.");
-        System.out.println("To run the analysis, please execute the SimpleLexer class.");
-        System.out.println("You can find the results in the console output.");
-        System.out.println("Thank you for using the MiniLang Lexical Analyzer!");
+        System.out.println("This is the MiniLang Analyzer.");
+        System.out.println("Ensure the 'input.minilang' file is present in the correct directory.");
+        System.out.println("The analyzer will perform: Lexical ➤ Syntax ➤ Semantic analysis.");
         System.out.println("---------------------------------------------------------------------------------");
-        SimpleLexer simpleLexer=new SimpleLexer();
-        simpleLexer.toString();
 
+        String fileName = "input.minilang";
+        StringBuilder codeBuffer = new StringBuilder();
+
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName))) {
+            String currentLine;
+            while ((currentLine = fileReader.readLine()) != null) {
+                codeBuffer.append(currentLine).append("\n");
+            }
+
+            // Lexical Analysis
+            System.out.println("\n📘 Performing Lexical Analysis...");
+            List<SimpleLexer.LexToken> tokens = SimpleLexer.lexAnalyze(codeBuffer.toString());
+            for (SimpleLexer.LexToken token : tokens) {
+                System.out.println(token);
+            }
+
+            // Syntax Analysis
+            System.out.println("\n📗 Performing Syntax Analysis...");
+            SimpleParser parser = new SimpleParser(tokens);
+            parser.parse();
+
+            // Semantic Analysis
+            System.out.println("\n📙 Performing Semantic Analysis...");
+            SemanticAnalyzer analyzer = new SemanticAnalyzer();
+            analyzer.analyze(tokens);
+
+            System.out.println("\n✅ All analyses completed successfully.");
+        } catch (IOException e) {
+            System.err.println("❌ Error: " + e.getMessage());
+        }
     }
 }
