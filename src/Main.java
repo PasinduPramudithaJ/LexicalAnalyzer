@@ -8,7 +8,7 @@ public class Main {
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println("This is the MiniLang Analyzer.");
         System.out.println("Ensure the 'input.minilang' file is present in the correct directory.");
-        System.out.println("The analyzer will perform: Lexical ➤ Syntax ➤ Semantic analysis.");
+        System.out.println("The analyzer will perform: Lexical ➤ Syntax ➤ Semantic ➤ Intermediate Code Generation.");
         System.out.println("---------------------------------------------------------------------------------");
 
         String fileName = "input.minilang";
@@ -37,7 +37,12 @@ public class Main {
             SemanticAnalyzer analyzer = new SemanticAnalyzer();
             analyzer.analyze(tokens);
 
-            System.out.println("\n✅ All analyses completed successfully.");
+            // Intermediate Code Generation
+            System.out.println("\n📒 Performing Intermediate Code Generation...");
+            IntermediateCodeGenerator icg = new IntermediateCodeGenerator(tokens);
+            icg.generate();
+
+            System.out.println("\n✅ All analyses and code generation completed successfully.");
         } catch (IOException e) {
             System.err.println("❌ Error: " + e.getMessage());
         }
