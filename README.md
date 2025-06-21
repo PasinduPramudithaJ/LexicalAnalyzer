@@ -149,5 +149,5 @@ This project is intended for academic and educational use. No commercial redistr
 ## 🙌 Acknowledgements
 
 - University of Kelaniya
-- Theory of Compilers course staff
+- Theory of Compilers Module
 - Java Compiler Design examples
